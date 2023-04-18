@@ -50,23 +50,41 @@ The client will run on `http://localhost:3000` and the server will run on `http:
 This is the directory structure of the app:
 inventory-management-app/
 ├── client/
+
 │ ├── node_modules/
+
 │ ├── public/
+
 │ ├── src/
+
 │ ├── package.json
+
 │ ├── package-lock.json
+
 │ └── README.md
+
 ├── server/
+
 │ ├── config/
+
 │ ├── controllers/
+
 │ ├── models/
+
 │ ├── routes/
+
 │ ├── utils/
+
 │ ├── .env
+
 │ ├── package.json
+
 │ ├── package-lock.json
+
 │ └── README.md
+
 ├── inventory.sql
+
 └── README.md
 
 - `client/` - Contains the React client code.
