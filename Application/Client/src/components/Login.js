@@ -16,7 +16,7 @@ function LoginPage() {
 
   return (
     <div className="login-page">
-      <h1 className="app-name">Inventory Tracker</h1>
+      <h1 className="app-name">Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Username:
