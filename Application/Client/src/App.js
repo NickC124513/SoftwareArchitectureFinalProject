@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import LoginPage from "./components/Login";
 
 function App() {
   const [data, setData] = useState([]);
@@ -13,12 +14,13 @@ function App() {
 
   return (
     <div>
-      <h1>Your App</h1>
+      <h1>INSERT CREATIVE NAME HERE</h1>
       <ul>
         {data.map((item) => (
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
+      <LoginPage />
     </div>
   );
 }
