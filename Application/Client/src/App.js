@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LoginPage from "./components/Login";
+import HomePage from "./components/HomePage";
 
 function App() {
   const [data, setData] = useState([]);
@@ -20,7 +21,7 @@ function App() {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
-      <LoginPage />
+      <HomePage />
     </div>
   );
 }
