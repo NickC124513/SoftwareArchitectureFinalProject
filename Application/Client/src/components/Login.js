@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Style/Login.css';
+import HomePage from './HomePage';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -7,10 +8,12 @@ function LoginPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === 'ncolleran' && password === 'password123') {
+    if (username === 'SirManagerSir' && password === 'password123') {
       console.log('Logged in!');
     } else {
-      console.log('Invalid credentials');
+      alert("Invalid credentials. Please try again.");
+      setUsername("");
+      setPassword("");
     }
   };
 
