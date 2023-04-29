@@ -21,7 +21,7 @@ function App() {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
-      <HomePage />
+      <LoginPage />
     </div>
   );
 }
