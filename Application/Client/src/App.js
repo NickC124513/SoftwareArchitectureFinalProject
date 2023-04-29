@@ -4,6 +4,15 @@ import HomePage from "./components/HomePage";
 
 function App() {
   const [data, setData] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   useEffect(() => {
     // fetch data from API
@@ -16,12 +25,11 @@ function App() {
   return (
     <div>
       <h1>Inventory Management</h1>
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-      <HomePage />
+      {isLoggedIn ? (
+        <HomePage onLogout={handleLogout} />
+      ) : (
+        <LoginPage onLogin={handleLogin} />
+      )}
     </div>
   );
 }

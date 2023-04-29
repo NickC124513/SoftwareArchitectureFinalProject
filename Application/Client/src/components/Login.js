@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import '../Style/Login.css';
 
-function LoginPage() {
+function LoginPage(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === 'ncolleran' && password === 'password123') {
+    if (username === 'SirManagerSir' && password === 'password123') {
       console.log('Logged in!');
+      props.onLogin();
+      setLoggedIn(true);
     } else {
-      console.log('Invalid credentials');
+      alert("Invalid credentials. Please try again.");
+      setUsername("");
+      setPassword("");
     }
   };
 
