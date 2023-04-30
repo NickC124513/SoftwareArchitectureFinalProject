@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from "./components/Login";
 import HomePage from "./components/HomePage";
+import InventoryPage from "./components/InventoryManager";
 
 function App() {
   const [data, setData] = useState([]);
@@ -26,7 +28,12 @@ function App() {
     <div>
       <h1>Inventory Management</h1>
       {isLoggedIn ? (
-        <HomePage onLogout={handleLogout} />
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<HomePage onLogout={handleLogout} />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+          </Routes>
+        </Router>
       ) : (
         <LoginPage onLogin={handleLogin} />
       )}
