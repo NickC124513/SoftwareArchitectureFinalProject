@@ -11,11 +11,11 @@ const InventoryPage = () => {
 
   const navigate = useNavigate();
 
-  // create a dummy inventory
+  // dummy inventory
   const [inventory, setInventory] = useState([
-    { product: 'Apples', quantity: 10, price: 0.5 },
-    { product: 'Oranges', quantity: 20, price: 0.4 },
-    { product: 'Bananas', quantity: 15, price: 0.3 },
+    { product: 'Apples', quantity: 10, price: 8.5 },
+    { product: 'Oranges', quantity: 20, price: 4 },
+    { product: 'Bananas', quantity: 15, price: 3 },
   ]);
 
   const handleAddProduct = (event) => {
@@ -49,12 +49,10 @@ const InventoryPage = () => {
 
     return (
       <div className="inventory-page">
-        {/* add a back button to the top left corner */}
         <button className="back-button" onClick={() => navigate(-1)}>
           Back
         </button>
         <h1 className="inventory-header">Inventory Management</h1>
-        {/* conditionally render the add product form or the edit product form */}
         {!editedProduct ? (
           <form className="inventory-form" onSubmit={handleAddProduct}>
             <label>
@@ -119,18 +117,16 @@ const InventoryPage = () => {
             </tr>
           </thead>
           <tbody>
-            {/* map over your inventory data and display it here */}
+            {/* map over inventory data and display it here */}
             {inventory.map((item) => (
               <tr key={item.product}>
                 <td>{item.product}</td>
                 <td>{item.quantity}</td>
                 <td>{item.price}</td>
-                {/* add delete and edit buttons to each row */}
                 <td>
                   <button onClick={() => handleDeleteProduct(item.product)}>
                     Delete
                   </button>
-                  {/* add an edit button to each row */}
                   <button
                     onClick={() =>
                       setEditedProduct(item) ||
