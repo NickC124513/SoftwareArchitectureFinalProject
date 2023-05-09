@@ -6,5 +6,5 @@ CREATE TABLE products (
   unit_price DECIMAL(10,2) NOT NULL,
   units_in_stock INT NOT NULL,
   reorder_level INT NOT NULL,
-  PRIMARY KEY (product_id),
+  PRIMARY KEY (product_id)
 );
