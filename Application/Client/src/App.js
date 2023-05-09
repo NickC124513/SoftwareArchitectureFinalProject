@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from "./components/Login";
 import HomePage from "./components/HomePage";
+import InventoryPage from "./components/InventoryManager";
 
 function App() {
   const [data, setData] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   useEffect(() => {
     // fetch data from API
@@ -16,12 +27,16 @@ function App() {
   return (
     <div>
       <h1>Inventory Management</h1>
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-      <HomePage />
+      {isLoggedIn ? (
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<HomePage onLogout={handleLogout} />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+          </Routes>
+        </Router>
+      ) : (
+        <LoginPage onLogin={handleLogin} />
+      )}
     </div>
   );
 }
