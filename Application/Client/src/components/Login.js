@@ -8,7 +8,7 @@ function LoginPage(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === 'SirManagerSir' && password === 'password123') {
+    if (username === 'user' && password === 'password') {
       console.log('Logged in!');
       props.onLogin();
       setLoggedIn(true);
