@@ -29,12 +29,12 @@ const InventoryPage = () => {
 
   const handleAddProduct = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch('http://localhost:5000/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product, quantity, price }),
+        body: JSON.stringify({ product_name: product, unit_price: price, units_in_stock: quantity }),
       });
       const data = await response.json();
       setInventory([...inventory, data]);
@@ -48,8 +48,8 @@ const InventoryPage = () => {
 
   const handleDeleteProduct = async (productToDelete) => {
     try {
-      await fetch(`http://localhost:5000/products/${productToDelete}`, { method: 'DELETE' });
-      setInventory(inventory.filter((item) => item.product !== productToDelete));
+      await fetch(`http://localhost:5000/products/${productToDelete.product_id}`, { method: 'DELETE' });
+      setInventory(inventory.filter((item) => item.product_id !== productToDelete.product_id));
     } catch (error) {
       console.error(error);
     }
@@ -57,16 +57,16 @@ const InventoryPage = () => {
 
   const handleUpdateProduct = async (event) => {
     event.preventDefault();
-
+  
     try {
-      const response = await fetch(`http://localhost:5000/products/${editedProduct.product}`, {
+      const response = await fetch(`http://localhost:5000/products/${editedProduct.product_id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ quantity, price }),
       });
       const data = await response.json();
       setInventory(
-        inventory.map((item) => (item.product === data.product ? data : item))
+        inventory.map((item) => (item.product_id === data.product_id ? data : item))
       );
       setEditedProduct(null);
       setQuantity(0);
@@ -75,6 +75,8 @@ const InventoryPage = () => {
       console.error(error);
     }
   };
+  
+  
 
     return (
       <div className="inventory-page">
