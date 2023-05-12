@@ -25,7 +25,7 @@ const InventoryPage = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [editedProduct, inventory]);
 
   const handleAddProduct = async (event) => {
     event.preventDefault();
@@ -58,14 +58,15 @@ const InventoryPage = () => {
 
   const handleUpdateProduct = async (event) => {
     event.preventDefault();
-    console.log("Handler for updating");
+    console.log(quantity);
   
     try {
       const response = await fetch(`http://localhost:5000/products/${editedProduct.product_id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quantity, price }),
+        body: JSON.stringify({ product_name: editedProduct.product_name, unit_price: price, units_in_stock: quantity }),
       });
+      console.log("fetched");
       const data = await response.json();
       setInventory(
         inventory.map((item) => (item.product_id === data.product_id ? data : item))
@@ -119,7 +120,7 @@ const InventoryPage = () => {
             <h2>Edit Product</h2>
             <label>
               Product:
-              <input type="text" value={editedProduct.product} readOnly />
+              <input type="text" value={editedProduct.product_name} readOnly />
             </label>
             <label>
               Quantity:
@@ -164,8 +165,11 @@ const InventoryPage = () => {
                   <button
                     onClick={() =>
                       setEditedProduct(item) ||
-                      setQuantity(item.quantity) ||
-                      setPrice(item.price)
+                      console.log("edit product set") ||
+                      setQuantity(item.units_in_stock) ||
+                      console.log("quantity set") ||
+                      setPrice(item.unit_price) ||
+                      console.log("edit price set")
                     }
                   >
                     Edit
