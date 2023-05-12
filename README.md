@@ -24,11 +24,11 @@ On the "Authentication Method" screen, select "Use Strong Password Encryption (R
 Continue through the remaining screens, accepting the default options until the installation is complete.
 
 #### Creating a New User, and setting up the tables
-Open the MySQL Command Line Client by searching for "MySQL Shell" on your pc, then running it. Alternatively, you could open the MySQL Shell by typing mysqlsh in your command prompt or terminal.
+Open the MySQL Command Line Client by searching for "MySQL Shell" on your pc, then running it. Alternatively, you could open the MySQL Shell by typing ```mysqlsh``` in your command prompt or terminal.
 
-Type "\sql" to change out of JS mode and into SQL mode.
+Type ```\sql``` to change out of JS mode and into SQL mode.
 
-Enter the following command: "\connect root@localhost". This will connect you to the root account you made during setup. 
+Enter the following command: ```\connect root@localhost```. This will connect you to the root account you made during setup. 
 
 Enter your root user password when prompted.
 
