@@ -88,9 +88,9 @@ To install this app, follow these steps:
 git clone https://github.com/your-username/inventory-management-app.git
 
 2. Install the dependencies for both the client and server:
-cd inventory-management-app
-cd client && npm install
-cd ../server && npm install
+```cd inventory-management-app```
+```cd client && npm install```
+```cd ../server && npm install```
 
 If you set up your MySQL with the correct values, no changes should be needed within the application.
 
@@ -98,8 +98,8 @@ If you set up your MySQL with the correct values, no changes should be needed wi
 
 #### Running the App
 To start the server and client, run the following commands in separate terminal windows:
-cd inventory-management-app/server && node server.js
-cd inventory-management-app/client && npm start
+```cd inventory-management-app/server && node server.js```
+```cd inventory-management-app/client && npm start```
 
 The client will run on `http://localhost:3000` and the server will run on `http://localhost:5000`.
 
