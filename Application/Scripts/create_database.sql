@@ -26,8 +26,9 @@ CREATE TABLE users (
 
 --Populate user table with dummy data
 INSERT INTO users (username, password) VALUES
+  ('art-store-manager', 'art-is-neat'),
   ('nick', 'passwordNC'),
   ('nicole', 'passwordNL'),
-  ('Matt', 'passwordML'),
-  ('will', 'I-Rush-A-When-I-Am-Supposed-To-Rush-B'),
-  ('taylor', 'Backend-Is-Best');
+  ('matt', 'passwordML'),
+  ('will', 'passwordWB'),
+  ('taylor', 'passwordTR');
