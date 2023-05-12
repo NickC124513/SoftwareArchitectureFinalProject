@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from "./components/Login";
 import HomePage from "./components/HomePage";
 import InventoryPage from "./components/InventoryManager";
+import PointOfSalePage from "./components/PointOfSale";
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ function App() {
 
   useEffect(() => {
     // fetch data from API
-    fetch("http://localhost:5000/users")
+    fetch("/api/data")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err));
@@ -32,6 +33,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage onLogout={handleLogout} />} />
             <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/point_of_sale" element={<PointOfSalePage/>} />
           </Routes>
         </Router>
       ) : (

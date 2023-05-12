@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Style/Home.css';
 import { Link } from 'react-router-dom';
-import { FaChartLine, FaCashRegister, FaTruck } from 'react-icons/fa';
+import { FaChartLine, FaCashRegister } from 'react-icons/fa';
 
 function HomePage() {
   return (
@@ -14,14 +14,12 @@ function HomePage() {
             View Inventory Report
           </button>
         </Link>
-        <button className="option-button">
-          <FaCashRegister className="option-icon" />
-          POS System
-        </button>
-        <button className="option-button">
-          <FaTruck className="option-icon" />
-          Truck Deliveries
-        </button>
+        <Link to="/point_of_sale">
+          <button className="option-button">
+            <FaCashRegister className="option-icon" />
+            POS System
+          </button>
+        </Link>
       </div>
     </div>
   );
