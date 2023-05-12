@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Style/PointOfSale.css';
 
@@ -12,15 +12,23 @@ const PointOfSalePage = () => {
   const navigate = useNavigate();
 
   // dummy inventory
-  const [inventory, setInventory] = useState([
-    { product: 'Apples', quantity: 10, price: 8.5 },
-    { product: 'Oranges', quantity: 20, price: 4 },
-    { product: 'Bananas', quantity: 15, price: 3 },
-  ]);
+  const [inventory, setInventory] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/products');
+        const data = await response.json();
+        setInventory(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchProducts();
+  }, [inventory]);
   const handleAddToCart = (event, item) => {
     event.preventDefault();
-    const existingItem = cart.find((cartItem) => cartItem.product === item.product);
+    const existingItem = cart.find((cartItem) => cartItem.product_name === item.product_name);
     const totalQuantityInCart = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
     if (existingItem) {
       if (totalQuantityInCart + 1 > item.quantity) {
@@ -107,9 +115,9 @@ const PointOfSalePage = () => {
           {/* map over inventory data and display it here */}
           {inventory.map((item) => (
             <tr key={item.product}>
-              <td>{item.product}</td>
-              <td>{item.quantity}</td>
-              <td>{item.price}</td>
+              <td>{item.product_name}</td>
+              <td>{item.units_in_stock}</td>
+              <td>{item.unit_price}</td>
               <td>
                 <button className="add-to-cart-button" onClick={(event) => handleAddToCart(event, item)}>Add to Cart</button>
               </td>
