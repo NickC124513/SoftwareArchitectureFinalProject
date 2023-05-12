@@ -4,19 +4,23 @@ import '../Style/Login.css';
 function LoginPage(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === 'user' && password === 'password') {
-      console.log('Logged in!');
-      props.onLogin();
-      setLoggedIn(true);
-    } else {
-      alert("Invalid credentials. Please try again.");
-      setUsername("");
-      setPassword("");
-    }
+    fetch("http://localhost:5000/users")
+      .then(res => res.json())
+      .then(data => {
+        const user = data.find(user => user.username === username && user.password === password);
+        if (user) {
+          console.log('Logged in!');
+          props.onLogin();
+        } else {
+          alert("Invalid credentials. Please try again.");
+          setUsername('');
+          setPassword('');
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   return (
