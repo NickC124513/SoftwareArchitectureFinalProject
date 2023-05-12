@@ -117,5 +117,7 @@ but it is recommended that you enter the following:
 - `inventory.sql` - Contains the SQL code to create the MySQL database schema.
 - `README.md` - This file.
 
+## Known Issues
+When running the application the cart for the Point of Sale System is not functioning as intended.
 
 
