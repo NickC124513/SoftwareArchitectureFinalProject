@@ -47,6 +47,7 @@ const InventoryPage = () => {
   };
 
   const handleDeleteProduct = async (productToDelete) => {
+    console.log(productToDelete);
     try {
       await fetch(`http://localhost:5000/products/${productToDelete.product_id}`, { method: 'DELETE' });
       setInventory(inventory.filter((item) => item.product_id !== productToDelete.product_id));
@@ -155,7 +156,7 @@ const InventoryPage = () => {
                 <td>{item.units_in_stock}</td>
                 <td>{item.unit_price}</td>
                 <td>
-                  <button onClick={() => handleDeleteProduct(item.product)}>
+                  <button onClick={() => handleDeleteProduct(item)}>
                     Delete
                   </button>
                   <button
