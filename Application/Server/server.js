@@ -30,6 +30,16 @@ app.get('/users', (req, res) => {
   });
 });
 
+app.get('/products', (req, res) => {
+  const sql = 'SELECT * FROM products';
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
+  });
+});
+
 app.listen(5000, () => {
   console.log('Server started on port 5000');
 });

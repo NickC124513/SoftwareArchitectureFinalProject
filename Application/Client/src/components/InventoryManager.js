@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Style/InventoryManager.css';
 
@@ -11,41 +11,70 @@ const InventoryPage = () => {
 
   const navigate = useNavigate();
 
-  // dummy inventory
-  const [inventory, setInventory] = useState([
-    { product: 'Apples', quantity: 10, price: 8.5 },
-    { product: 'Oranges', quantity: 20, price: 4 },
-    { product: 'Bananas', quantity: 15, price: 3 },
-  ]);
+  const [inventory, setInventory] = useState([]);
 
-  const handleAddProduct = (event) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/products');
+        const data = await response.json();
+        setInventory(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleAddProduct = async (event) => {
     event.preventDefault();
-    // add the new product to your inventory data
-    setInventory([...inventory, { product, quantity, price }]);
-    // reset the form fields
-    setProduct('');
-    setQuantity(0);
-    setPrice(0);
+
+    try {
+      const response = await fetch('http://localhost:5000/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product, quantity, price }),
+      });
+      const data = await response.json();
+      setInventory([...inventory, data]);
+      setProduct('');
+      setQuantity(0);
+      setPrice(0);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-    const handleDeleteProduct = (productToDelete) => {
+  const handleDeleteProduct = async (productToDelete) => {
+    try {
+      await fetch(`http://localhost:5000/products/${productToDelete}`, { method: 'DELETE' });
       setInventory(inventory.filter((item) => item.product !== productToDelete));
-    };
-  
-    const handleUpdateProduct = (event) => {
-      event.preventDefault();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleUpdateProduct = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:5000/products/${editedProduct.product}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity, price }),
+      });
+      const data = await response.json();
       setInventory(
-        inventory.map((item) =>
-          item.product === editedProduct.product
-            ? { ...item, quantity, price }
-            : item
-        )
+        inventory.map((item) => (item.product === data.product ? data : item))
       );
-      // reset the form fields and close the edit form
       setEditedProduct(null);
       setQuantity(0);
       setPrice(0);
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
     return (
       <div className="inventory-page">
@@ -119,10 +148,10 @@ const InventoryPage = () => {
           <tbody>
             {/* map over inventory data and display it here */}
             {inventory.map((item) => (
-              <tr key={item.product}>
-                <td>{item.product}</td>
-                <td>{item.quantity}</td>
-                <td>{item.price}</td>
+              <tr key={item.product_id}>
+                <td>{item.product_name}</td>
+                <td>{item.units_in_stock}</td>
+                <td>{item.unit_price}</td>
                 <td>
                   <button onClick={() => handleDeleteProduct(item.product)}>
                     Delete
